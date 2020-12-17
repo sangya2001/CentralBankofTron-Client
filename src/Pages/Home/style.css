@@ -1,0 +1,7 @@
+.dummyHome{
+    overflow-y: hidden;
+}
+.dummyHome > .dummyBody{
+    max-height: 91vh;
+    overflow-y: scroll;
+}

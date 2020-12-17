@@ -1,0 +1,77 @@
+.dashboard {
+  text-align: center;
+}
+
+/* topbar */
+.dashboard .topBar {
+  margin: 30px 0;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* universal data */
+.dashboard .scrollableZone > .universalData {
+  margin: 30px 0 50px 0;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dashboard .scrollableZone > .universalData > div {
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
+  padding: 5px 90px;
+  margin-right: 50px;
+  border-left: 5px solid rgba(38, 222, 129, 0.5);
+}
+
+.dashboard .scrollableZone > .universalData h2 {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+.dashboard .scrollableZone > .assetInfo {
+  margin: 30px 0 50px 0;
+  padding: 0 30px;
+}
+
+.dashboard .scrollableZone > .assetInfo > .flexData {
+  display: flex;
+  justify-content: space-evenly;
+}
+.dashboard .scrollableZone > .assetInfo > .flexData > div {
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
+  padding: 5px 90px;
+  margin-right: 50px;
+  border-left: 5px solid rgba(38, 222, 129, 0.5);
+}
+.dashboard .scrollableZone > .referralInfo {
+  margin: 30px 0 50px 0;
+  padding: 0 30px;
+}
+
+.dashboard .scrollableZone > .referralInfo > .flexData {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.dashboard .scrollableZone > .referralInfo > .flexData > div {
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
+  padding: 5px 100px;
+  margin-right: 50px;
+  border-left: 5px solid rgba(38, 222, 129, 0.5);
+}
+
+.dashboard .scrollableZone {
+  height: 76vh;
+  overflow-y: scroll;
+  display: block;
+  padding: 0 50px;
+}

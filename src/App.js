@@ -1,26 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import "./App.css";
-import {initContract} from "./Utils/Utils";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // components
 import Loading from "./Components/Loading";
-
 // packages
-import {AnimatePresence} from 'framer-motion';
+import { AnimatePresence } from "framer-motion";
+const Dashboard = React.lazy(() => import("./Pages/Dashboard"));
+const Home = React.lazy(() => import("./Pages/Home"));
 
 function App() {
-  const [contract, setContract] = useState(null);
-
-  useEffect(() => {
-    initContract().then((contract) => {
-      setContract(contract);
-    });
-  }, []);
   return (
     <AnimatePresence>
-      {!contract && <Loading/>}
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <Home />
+              </Suspense>
+            )}
+          />
+          <Route
+            exact
+            path="/dashboard"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <Dashboard />
+              </Suspense>
+            )}
+          />
+        </Switch>
+      </BrowserRouter>
     </AnimatePresence>
   );
 }
-
 export default App;

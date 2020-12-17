@@ -1,0 +1,35 @@
+.landing {
+  display: flex;
+}
+
+.landing > .left {
+  background: url("../../Assets/Landing.webp") no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 91vh;
+}
+
+.landing > .left,
+.landing > .right {
+  max-width: 50vw;
+}
+
+.landing > .right {
+  padding: 100px 50px 100px 60px;
+}
+
+.landing > .right > h1 {
+  line-height: 1.5;
+  font-size: 44px;
+}
+
+.landing > .right > .investNow {
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 2;
+  color: #fff;
+  background: #26de81;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 12px;
+}
