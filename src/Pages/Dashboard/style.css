@@ -11,6 +11,13 @@
   align-items: center;
 }
 
+.dashboard .topBar .MuiButton-root{
+  background: #26de81;
+  color: #fff;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
 /* universal data */
 .dashboard .scrollableZone > .universalData {
   margin: 30px 0 50px 0;
@@ -42,6 +49,13 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.dashboard .scrollableZone > .assetInfo > .flexData > .totalReferralBonus .MuiButton-root{
+  background: #26de81;
+  color: #fff;
+  font-weight: 600;
+}
+
 .dashboard .scrollableZone > .assetInfo > .flexData > div {
   border-radius: 12px;
   background: #ffffff;
@@ -67,6 +81,11 @@
   padding: 5px 100px;
   margin-right: 50px;
   border-left: 5px solid rgba(38, 222, 129, 0.5);
+}
+
+.dashboard .scrollableZone > .referralInfo .MuiButton-root {
+  background: #26de81;
+  padding: 10px 30px;
 }
 
 .dashboard .scrollableZone {

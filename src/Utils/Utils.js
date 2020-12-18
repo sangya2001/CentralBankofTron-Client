@@ -19,6 +19,7 @@ const waitTron = () => {
 }
 
 // functon to initialize the contract accessor
+
 export const initContract = async () => {
     let tronExists = await waitTron();
     if (!tronExists) {
@@ -26,7 +27,7 @@ export const initContract = async () => {
         return null;
     }
 
-    const contractAddress = 'TTnfcuLUuVvEgtRQts7xZmYHQsV3gUfNTu';
+    const contractAddress = 'TVoiLdXi6UQJg3oS7E5BtRbS17Uz5sTkjJ';
     let contract = await window.tronWeb.contract().at(contractAddress);
     return contract;
 }

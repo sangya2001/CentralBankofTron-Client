@@ -1,0 +1,33 @@
+.investment {
+  padding: 20px 30px;
+  background: #fff;
+  box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
+  padding: 30px 100px;
+  border-left: 5px solid rgba(38, 222, 129, 0.5);
+  max-width: 25vw;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.investment > input {
+    border: 1px solid #3a3a3a;
+    padding: 15px;
+    width: 30vw;
+    margin-bottom: 20px;
+    border-radius: 12px;
+}
+
+.investment > input:focus {
+    outline: none;
+}
+
+.investment > .MuiButton-root{
+    background: #26de81;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 30px;
+    margin-left: 20px;
+    width: 20vw;
+}

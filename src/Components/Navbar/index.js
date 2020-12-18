@@ -19,7 +19,7 @@ export default function Navbar({ page }) {
       <div className="navSocial">
         <ul>
           <li>
-            {page == "home" ? <Link to="/dashboard">
+            {page === "home" ? <Link to="/dashboard">
               <b>Dashboard</b>
             </Link> : <Link to="/">
                 <b>Logout</b>
