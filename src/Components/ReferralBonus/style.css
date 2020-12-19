@@ -2,25 +2,10 @@
   display: flex;
 }
 
-.referralBonus > .left,
-.referralBonus > .right {
-  max-width: 50vw;
-}
-
 .referralBonus > .right {
   background: url("../../Assets/Referral.webp") no-repeat;
   background-size: cover;
   width: 136vw;
-  height: 91vh;
-}
-
-.referralBonus > .left {
-  padding: 130px 80px;
-}
-
-.referralBonus > .left > h1 {
-  line-height: 1.5;
-  font-size: 44px;
 }
 
 .referralBonus > .left > .referNow {
@@ -28,7 +13,7 @@
   font-size: 18px;
   line-height: 2;
   color: #fff;
-  background: #FED330;
+  background: #fed330;
   font-weight: 600;
   padding: 15px 25px;
   border-radius: 12px;

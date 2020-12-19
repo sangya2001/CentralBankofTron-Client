@@ -11,13 +11,10 @@ body {
   overflow-y: hidden;
 }
 
-
 /* Responsive CSS */
-
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-
   .landing {
     display: flex;
     flex-flow: wrap;
@@ -26,98 +23,264 @@ body {
   .landing > .right > h1 {
     line-height: 1.5;
     font-size: 27px;
+  }
+
+  .referralBonus {
+    display: flex;
+    flex-flow: wrap-reverse;
+  }
+  .referralBonus > .right {
+    background-size: contain;
+    width: 100%;
+  }
+  .landing > .left {
+    width: 100%;
+    background-size: cover;
+  }
+
+  .landing > .left,
+  .landing > .right {
+    max-width: 100%;
+  }
+
+  .referralBonus > .left,
+  .referralBonus > .right {
+    max-width: 100%;
+  }
+  .referralBonus > .right {
+    height: 60vh;
+  }
+  .referralBonus > .left > h1 {
+    line-height: 1.5;
+    font-size: 27px;
+  }
+  .referralBonus > .left {
+    padding: 60px 40px;
+  }
+
+  .landing > .right {
+    padding: 40px 39px 60px 40px;
+  }
+  .logoText {
+    display: none;
+  }
+  .navbar > .logo > img {
+    width: 8vw;
+  }
+  .landing > .left {
+    height: 57vh;
+  }
+  .dashboard .topBar {
+    flex-flow: wrap;
 }
 
-.referralBonus {
+.walletBalance{
   display: flex;
-  flex-flow: wrap-reverse;
-}
-.referralBonus > .right {
-  background-size: contain;
-  width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin:20px 0px;
 }
 
+.dashboard .scrollableZone > .universalData {
+  flex-direction: column;
+  align-items: center;
 }
+
+.dashboard .scrollableZone > .universalData > div {
+  
+  padding: 3px 8px;
+  min-width: 269px;
+
+}}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
   .landing {
     display: flex;
-}
-.landing > .right > h1 {
-  line-height: 1.5;
-  font-size: 27px;
-}
-.referralBonus {
-  display: flex;
- 
-}
-.referralBonus > .right {
-  background-size: contain;
-}
-
-
+  }
+  .landing > .right > h1 {
+    line-height: 1.5;
+    font-size: 27px;
+  }
+  .referralBonus {
+    display: flex;
+  }
+  .referralBonus > .right {
+    background-size: contain;
+  }
+  .landing > .left {
+    width: 100%;
+    background-size: cover;
+  }
+  .landing > .left,
+  .landing > .right {
+    max-width: 100%;
+  }
+  .referralBonus > .left,
+  .referralBonus > .right {
+    max-width: 100%;
+  }
+  .referralBonus > .right {
+    height: 75vh;
+  }
+  .referralBonus > .left > h1 {
+    line-height: 1.5;
+    font-size: 27px;
+  }
+  .referralBonus > .left {
+    padding: 90px 52px;
+  }
+  .landing > .right {
+    padding: 40px 39px 60px 40px;
+  }
+  .navbar > .logo > img {
+    width: 8vw;
+  }
+  .landing > .left {
+    height: 60vh;
+  }
+  .walletBalance{
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px 0px;
+  }
+  .dashboard .scrollableZone > .universalData {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
   .landing {
     display: flex;
   }
   .landing > .right > h1 {
     line-height: 1.5;
     font-size: 44px;
-}
-.referralBonus {
-  display: flex;
- 
-}
-  
+  }
+  .referralBonus {
+    display: flex;
+  }
+  .landing > .left {
+    width: 100%;
+    background-size: cover;
+  }
 
+  .referralBonus > .left,
+  .referralBonus > .right {
+    max-width: 100%;
+  }
+
+  .referralBonus > .right {
+    height: 80vh;
+  }
+  .referralBonus > .left > h1 {
+    line-height: 1.5;
+    font-size: 35px;
+  }
+  .referralBonus > .left {
+    padding: 90px 52px;
+  }
+  .landing > .right {
+    padding: 100px 50px 100px 60px;
+  }
+  .navbar > .logo > img {
+    width: 3vw;
+  }
+  .landing > .left {
+    height: 70vh;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
-
   .landing {
     display: flex;
   }
 
   .landing > .left,
-.landing > .right {
-  max-width: 50vw;
-}
-.landing > .right > h1 {
-  line-height: 1.5;
-  font-size: 44px;
-}
-.referralBonus {
-  display: flex;
- 
-}
+  .landing > .right {
+    max-width: 50vw;
+  }
+  .landing > .right > h1 {
+    line-height: 1.5;
+    font-size: 44px;
+  }
+  .referralBonus {
+    display: flex;
+  }
+  .landing > .left {
+    width: 100%;
+    background-size: cover;
+  }
 
-  
+  .referralBonus > .left,
+  .referralBonus > .right {
+    max-width: 50vw;
+  }
+
+  .referralBonus > .right {
+    height: 91vh;
+  }
+  .referralBonus > .left > h1 {
+    line-height: 1.5;
+    font-size: 44px;
+  }
+  .referralBonus > .left {
+    padding: 130px 80px;
+  }
+  .landing > .right {
+    padding: 100px 50px 100px 60px;
+  }
+  .navbar > .logo > img {
+    width: 3vw;
+  }
+  .landing > .left {
+    height: 85vh;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
   .landing {
     display: flex;
   }
 
-.landing > .left,
-.landing > .right {
-  max-width: 50vw;
-}
-.referralBonus {
-  display: flex;
- 
-}
+  .landing > .left,
+  .landing > .right {
+    max-width: 50vw;
+  }
+  .referralBonus {
+    display: flex;
+  }
 
-  
+  .referralBonus > .left,
+  .referralBonus > .right {
+    max-width: 50vw;
+  }
 
+  .referralBonus > .right {
+    height: 91vh;
+  }
+
+  .referralBonus > .left > h1 {
+    line-height: 1.5;
+    font-size: 44px;
+  }
+  .referralBonus > .left {
+    padding: 130px 80px;
+  }
+  .landing > .right {
+    padding: 100px 50px 100px 60px;
+  }
+  .navbar > .logo > img {
+    width: 3vw;
+  }
+  .landing > .left {
+    height: 91vh;
+  }
 }

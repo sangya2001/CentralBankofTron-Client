@@ -1,12 +1,7 @@
 
 .landing > .left {
   background: url("../../Assets/Landing.webp") no-repeat;
-  height: 91vh;
-}
-
-
-.landing > .right {
-  padding: 100px 50px 100px 60px;
+  background-size: cover 
 }
 
 

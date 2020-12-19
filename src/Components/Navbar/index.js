@@ -12,7 +12,7 @@ export default function Navbar({ page }) {
     <div className="navbar">
       {/* logo */}
       <Link to='/' className="logo">
-        <img src={Logo} alt="Central Bank of Tron" /> Central Bank of Tron
+        <img src={Logo} alt="Central Bank of Tron" /> <span className="logoText">Central Bank of Tron</span>
       </Link>
 
       {/* nav socials */}
