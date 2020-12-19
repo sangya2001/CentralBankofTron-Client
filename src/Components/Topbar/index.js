@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from "@material-ui/core";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 
 export default function Topbar({ contract }) {
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState("0");
     const [ROIClaimableAt, setROIClaimableAt] = useState('');
+    const [Copied, setCopied] = useState(false);
 
+    const refralURL = "https://centralbank-tron.com/dashboard/refer/"+address;
+
+   
     useEffect(() => {
         // set account address
         window.tronWeb.trx
@@ -38,6 +44,12 @@ export default function Topbar({ contract }) {
         <div className="topBar">
             <div className="walletAddress">
                 <b>Your Address</b>: {address}
+               <CopyToClipboard text={refralURL}
+                onCopy={() => setCopied(true)}>
+                <button style={{margin:"5px"}}>Click to copy refral link</button>
+                </CopyToClipboard>
+                {Copied ? <span style={{color: 'red'}}>Copied.</span> : null}
+             
             </div>
             <div className="walletBalance">
                 <Button disabled={ROIClaimableAt >= 0 && true}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>

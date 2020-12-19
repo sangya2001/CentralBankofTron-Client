@@ -10,3 +10,114 @@ ul {
 body {
   overflow-y: hidden;
 }
+
+
+/* Responsive CSS */
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  .landing {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  .landing > .right > h1 {
+    line-height: 1.5;
+    font-size: 27px;
+}
+
+.referralBonus {
+  display: flex;
+  flex-flow: wrap-reverse;
+}
+.referralBonus > .right {
+  background-size: contain;
+  width: 100%;
+}
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+  .landing {
+    display: flex;
+}
+.landing > .right > h1 {
+  line-height: 1.5;
+  font-size: 27px;
+}
+.referralBonus {
+  display: flex;
+ 
+}
+.referralBonus > .right {
+  background-size: contain;
+}
+
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+  .landing {
+    display: flex;
+  }
+  .landing > .right > h1 {
+    line-height: 1.5;
+    font-size: 44px;
+}
+.referralBonus {
+  display: flex;
+ 
+}
+  
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+  .landing {
+    display: flex;
+  }
+
+  .landing > .left,
+.landing > .right {
+  max-width: 50vw;
+}
+.landing > .right > h1 {
+  line-height: 1.5;
+  font-size: 44px;
+}
+.referralBonus {
+  display: flex;
+ 
+}
+
+  
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+  .landing {
+    display: flex;
+  }
+
+.landing > .left,
+.landing > .right {
+  max-width: 50vw;
+}
+.referralBonus {
+  display: flex;
+ 
+}
+
+  
+
+}
