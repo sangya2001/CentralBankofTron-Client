@@ -9,9 +9,13 @@ import Topbar from "../../Components/Topbar";
 import UniversalData from "../../Components/UniversalData";
 import ReferralInfo from "../../Components/ReferralInfo";
 import Investment from "../../Components/Investment";
+import { useParams } from "react-router-dom";
 
 export default function Dashboard() {
   const [contract, setContract] = useState(null);
+
+  const params = useParams();
+  const refralID = (params.refer) ? params.refralID : "";
 
   // user details
   const [isUser, setIsUser] = useState(0);
@@ -45,7 +49,7 @@ export default function Dashboard() {
             {isUser !== 0 && <AssetInfo contract={contract} />}
             {isUser !== 0 && <hr />}
             {isUser !== 0 && <ReferralInfo contract={contract}/>}
-            {isUser === 0 && <Investment contract={contract} />}
+            {isUser === 0 && <Investment contract={contract} refralID={refralID} />}
           </div>
         </div>
       ) : (

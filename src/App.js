@@ -24,11 +24,11 @@ function App() {
             )}
           />
           <Route
-            exact
-            path="/dashboard"
+            // exact
+            path="/dashboard/:refer?/:refralID?"
             render={() => (
               <Suspense fallback={<Loading />}>
-                <Dashboard />
+                <Dashboard  />
               </Suspense>
             )}
           />

@@ -4,10 +4,12 @@ import "./style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Investment({ contract }) {
+export default function Investment({ contract, refralID }) {
   const [investmentAmount, setInvestmentAmount] = useState("");
-  const [refAddress, setRefAddress] = useState("");
+  const [refAddress, setRefAddress] = useState(refralID);
   const errorMsg = "Min Investment is 50TRX.";
+
+
 
   const invest = () => {
     contract
