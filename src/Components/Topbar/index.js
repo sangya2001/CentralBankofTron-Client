@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
-export default function Topbar({ contract }) {
+export default function Topbar({ contract, setIsLoading }) {
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState("0");
     const [ROIClaimableAt, setROIClaimableAt] = useState('');
@@ -55,7 +55,8 @@ export default function Topbar({ contract }) {
                 <div style={{marginRight: "10px"}}><b>Your Balance</b>: {balance / 10 ** 6} TRX</div>
                 <Button disabled={ROIClaimableAt >= 0 && true} onClick={() => {
                     contract.claimROI().send().then(() => {});
-                    setTimeout(() => {window.location.reload()}, 4000);
+                    setIsLoading(true)
+                    setTimeout(() => {window.location.reload()}, 13000);
                 }}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
             </div>
         </div>

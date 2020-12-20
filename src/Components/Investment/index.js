@@ -4,7 +4,7 @@ import "./style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Investment({ contract, refralID }) {
+export default function Investment({ contract, refralID, setIsLoading }) {
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [refAddress, setRefAddress] = useState(refralID);
   const errorMsg = "Min Investment is 50TRX.";
@@ -22,7 +22,8 @@ export default function Investment({ contract, refralID }) {
         setInvestmentAmount("");
       });
 
-      setTimeout(() => {window.location.reload()}, 6000);
+      setIsLoading(true);
+      setTimeout(() => {window.location.reload()}, 13000);
   };
 
   const investWithoutAddress = () => {
@@ -36,7 +37,8 @@ export default function Investment({ contract, refralID }) {
         setInvestmentAmount("");
       });
 
-      setTimeout(() => {window.location.reload()}, 4000);
+      setIsLoading(true)
+      setTimeout(() => {window.location.reload()}, 13000);
   };
 
   return (

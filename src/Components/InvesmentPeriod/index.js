@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "./style.css";
 
-const InvestmentPeriod = ({ contract }) => {
+const InvestmentPeriod = ({ contract, setIsLoading }) => {
   const [investmentPeriod, setInvestmentPeriod] = useState("");
   const [investmentAmount, setInvestmentAmount] = useState("");
   const errorMsg = "Min Investment is 50TRX.";
@@ -72,8 +72,8 @@ const InvestmentPeriod = ({ contract }) => {
                     .then((res) => {
                       setInvestmentAmount("");
                     });
-
-                    setTimeout(() => {window.location.reload()}, 4000);
+                    setIsLoading(true)
+                    setTimeout(() => {window.location.reload()}, 13000);
                 } else {
                   toast.error(errorMsg, {
                     position: "top-right",
