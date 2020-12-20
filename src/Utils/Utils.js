@@ -27,7 +27,7 @@ export const initContract = async () => {
         return null;
     }
 
-    const contractAddress = 'THBbc8pnNw4X4qwCTHtCiFvMFxiKz8LNeM';
+    const contractAddress = 'TTr2wmWvVAZWqDAFce4j1pjh81B6ibBFPm';
     let contract = await window.tronWeb.contract().at(contractAddress);
     return contract;
 }
