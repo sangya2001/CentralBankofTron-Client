@@ -34,7 +34,7 @@ export default function AssetInfo({ contract }) {
 
     return (
         <div className="assetInfo">
-            <h1 style={{margin: "40px 0"}}>Asset Info</h1>
+            <h1 style={{ margin: "40px 0" }}>Asset Info</h1>
             <div className="flexData">
                 <div className="totalInvestors">
                     <h2>
@@ -64,7 +64,8 @@ export default function AssetInfo({ contract }) {
                             }
                             {
                                 withdrawableAt <= 0 && <Button onClick={() => {
-                                    contract.withdrawAndReinvest().send().then(res => console.log(res))
+                                    contract.withdrawAndReinvest().send().then(() => {});
+                                    setTimeout(() => {window.location.reload()}, 4000);
                                 }}>Withdraw Dividend</Button>
                             }
                         </span>

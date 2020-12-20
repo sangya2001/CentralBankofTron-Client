@@ -21,6 +21,8 @@ export default function Investment({ contract, refralID }) {
       .then((res) => {
         setInvestmentAmount("");
       });
+
+      setTimeout(() => {window.location.reload()}, 6000);
   };
 
   const investWithoutAddress = () => {
@@ -33,6 +35,8 @@ export default function Investment({ contract, refralID }) {
       .then((res) => {
         setInvestmentAmount("");
       });
+
+      setTimeout(() => {window.location.reload()}, 4000);
   };
 
   return (

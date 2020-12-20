@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from "@material-ui/core";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 export default function Topbar({ contract }) {
@@ -9,9 +9,9 @@ export default function Topbar({ contract }) {
     const [ROIClaimableAt, setROIClaimableAt] = useState('');
     const [Copied, setCopied] = useState(false);
 
-    const refralURL = "https://centralbank-tron.com/dashboard/refer/"+address;
+    const refralURL = address;
 
-   
+
     useEffect(() => {
         // set account address
         window.tronWeb.trx
@@ -44,16 +44,19 @@ export default function Topbar({ contract }) {
         <div className="topBar">
             <div className="walletAddress">
                 <b>Your Address</b>: {address}
-               <CopyToClipboard text={refralURL}
-                onCopy={() => setCopied(true)}>
-                <button style={{margin:"5px"}}>Click to copy refral link</button>
+                <CopyToClipboard text={refralURL}
+                    onCopy={() => setCopied(true)}>
+                    <button style={{ margin: "5px", background: "#26DE81", border: "none", color: "#fff", padding: "10px", borderRadius: "4px", fontWeight: "600" }}>COPY REFERRAL LINK</button>
                 </CopyToClipboard>
-                {Copied ? <span style={{color: 'red'}}>Copied.</span> : null}
-             
+                {Copied ? <span style={{ color: 'red' }}>Copied.</span> : null}
+
             </div>
             <div className="walletBalance">
-                <Button disabled={ROIClaimableAt >= 0 && true}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
-                <b>Your Balance</b>: {balance / 10 ** 6} TRX
+                <div style={{marginRight: "10px"}}><b>Your Balance</b>: {balance / 10 ** 6} TRX</div>
+                <Button disabled={ROIClaimableAt >= 0 && true} onClick={() => {
+                    contract.claimROI().send().then(() => {});
+                    setTimeout(() => {window.location.reload()}, 4000);
+                }}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
             </div>
         </div>
     )

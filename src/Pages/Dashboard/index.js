@@ -10,9 +10,11 @@ import UniversalData from "../../Components/UniversalData";
 import ReferralInfo from "../../Components/ReferralInfo";
 import Investment from "../../Components/Investment";
 import { useParams } from "react-router-dom";
+import InvestmentPeriod from "../../Components/InvesmentPeriod";
 
 export default function Dashboard() {
   const [contract, setContract] = useState(null);
+  const [investmentPeriod, setInvestmentPeriod] = useState("");
 
   const params = useParams();
   const refralID = (params.refer) ? params.refralID : "";
@@ -33,7 +35,23 @@ export default function Dashboard() {
       );
       setContract(contract);
 
-      console.log(contract);
+      window.tronWeb.trx.getAccount().then((data) => {
+        contract &&
+          contract
+            .users(
+              window.tronWeb.address.fromHex(
+                data.address || data.__payload__.address
+              )
+            )
+            .call()
+            .then((data) => {
+              setInvestmentPeriod(
+                window.tronWeb.toDecimal(
+                  data.withdrawableDisablesAt - Math.round(Date.now() / 1000)
+                )
+              );
+            });
+      });
     });
   }, []);
   return (
@@ -41,20 +59,21 @@ export default function Dashboard() {
       {contract ? (
         <div>
           <Navbar />
-          <Topbar contract={contract}/>
+          <Topbar contract={contract} />
           <hr />
           <div className="scrollableZone">
             <UniversalData contract={contract} />
             <hr />
-            {isUser !== 0 && <AssetInfo contract={contract} />}
+            {isUser !== 0 && investmentPeriod > 0 && <InvestmentPeriod contract={contract}/>}
+            {isUser !== 0 && investmentPeriod > 0 && <AssetInfo contract={contract} />}
             {isUser !== 0 && <hr />}
-            {isUser !== 0 && <ReferralInfo contract={contract}/>}
+            {isUser !== 0 && investmentPeriod > 0 && <ReferralInfo contract={contract}/>}
             {isUser === 0 && <Investment contract={contract} refralID={refralID} />}
           </div>
         </div>
       ) : (
-        <Loading />
-      )}
+          <Loading />
+        )}
     </div>
   );
 }

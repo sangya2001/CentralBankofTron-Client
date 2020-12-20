@@ -4,14 +4,14 @@
 
 /* topbar */
 .dashboard .topBar {
-  margin: 30px 0;
+  margin: 0;
   padding: 0 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dashboard .topBar .MuiButton-root{
+.dashboard .topBar .MuiButton-root {
   background: #26de81;
   color: #fff;
   font-weight: 600;
@@ -24,6 +24,7 @@
   padding: 0 30px;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .dashboard .scrollableZone > .universalData > div {
@@ -50,7 +51,12 @@
   justify-content: space-evenly;
 }
 
-.dashboard .scrollableZone > .assetInfo > .flexData > .totalReferralBonus .MuiButton-root{
+.dashboard
+  .scrollableZone
+  > .assetInfo
+  > .flexData
+  > .totalReferralBonus
+  .MuiButton-root {
   background: #26de81;
   color: #fff;
   font-weight: 600;
@@ -71,7 +77,7 @@
 
 .dashboard .scrollableZone > .referralInfo > .flexData {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-evenly;
 }
 .dashboard .scrollableZone > .referralInfo > .flexData > div {
@@ -89,8 +95,78 @@
 }
 
 .dashboard .scrollableZone {
-  height: 76vh;
+  height: 79vh;
   overflow-y: scroll;
   display: block;
   padding: 0 50px;
+}
+
+@media (max-width: 992px) {
+  .dashboard .scrollableZone > .universalData > div {
+    padding: 5px 60px;
+  }
+
+  .dashboard .scrollableZone > .assetInfo > .flexData > div {
+    padding: 5px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard .topBar {
+    margin-top: 20px;
+  }
+
+  .dashboard .scrollableZone > .universalData > div {
+    margin-right: 20px;
+    padding: 5px 50px;
+  }
+
+  .dashboard .scrollableZone > .assetInfo > .flexData > div {
+    margin-right: 20px;
+    padding: 5px 50px;
+  }
+  .dashboard .scrollableZone > .referralInfo > .flexData > div {
+    margin-right: 20px;
+    padding: 10px 50px 30px 50px!important;
+  }
+}
+
+@media (max-width: 577px) {
+  .dashboard .topBar .walletBalance {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard .scrollableZone{
+    height: 60vh;
+  }
+
+  .dashboard .scrollableZone > .universalData {
+    flex-direction: column;
+  }
+
+  .dashboard .scrollableZone > .universalData > div {
+    margin-bottom: 20px;
+    width: 60vw;
+  }
+
+  .dashboard .scrollableZone > .assetInfo > .flexData {
+    flex-direction: column;
+  }
+
+  .dashboard .scrollableZone > .assetInfo > .flexData > div {
+    margin-bottom: 20px;
+  }
+
+  .dashboard .scrollableZone > .referralInfo > .flexData{
+    flex-direction: column;
+  }
+
+  .dashboard .scrollableZone > .referralInfo > .flexData > div {
+    margin-bottom: 20px;
+    width: 60vw;
+  }
 }

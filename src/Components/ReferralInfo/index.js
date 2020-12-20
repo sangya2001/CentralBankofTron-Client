@@ -44,10 +44,21 @@ export default function ReferralInfo({ contract }) {
                 <div style={{padding: "0 150px 20px 150px"}}>
                     <h2>
                         <span style={{ fontSize: "30px", color: "#5a5a5a", margin: "0" }}>
-                            {referralBonus} TRX
+                            {referralBonus/1000000} TRX
                 </span>
                     </h2>
-                    <Button disabled={referralBonus <= 0 && true}>Claim Bonus</Button>
+                    <Button onClick={() => 
+                        {contract.claimReferralBonus()
+                        .send()
+                        .then((res) => {
+                            console.log("Bonus Claimed!"); 
+                        })
+                        setTimeout(() => {window.location.reload()}, 4000);
+                    }} 
+                        
+                        disabled={referralBonus <= 0 && true}>
+                            Claim Bonus
+                    </Button>
                 </div>
             </div>
         </div >

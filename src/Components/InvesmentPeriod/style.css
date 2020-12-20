@@ -1,0 +1,37 @@
+.investmentPeriod {
+  width: 100%;
+  padding: 10px 0;
+  font-weight: 600;
+  background: #e74c3c;
+  color: #fff;
+}
+
+.reinvestmentForm {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
+  width: 30vw;
+  margin: 30px auto;
+  padding: 20px 0;
+}
+
+.reinvestmentForm > input {
+  border: 1px solid #3a3a3a;
+  padding: 15px;
+  width: 85%;
+  border-radius: 12px;
+}
+
+.reinvestmentForm > input:focus {
+  outline: none;
+}
+
+.reinvestmentForm > .MuiButton-root {
+  background: #26de81;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 30px;
+  /* margin-left: 20px; */
+  width: 70%;
+  margin-top: 20px;
+}
