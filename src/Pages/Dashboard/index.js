@@ -41,7 +41,7 @@ export default function Dashboard() {
       {contract ? (
         <div>
           <Navbar />
-          <Topbar contract={contract}/>
+          <Topbar contract={contract} refralID={refralID}/>
           <hr />
           <div className="scrollableZone">
             <UniversalData contract={contract} />

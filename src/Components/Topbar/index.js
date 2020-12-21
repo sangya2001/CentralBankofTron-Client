@@ -3,13 +3,13 @@ import { Button } from "@material-ui/core";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
-export default function Topbar({ contract }) {
+export default function Topbar({ contract, refralID }) {
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState("0");
     const [ROIClaimableAt, setROIClaimableAt] = useState('');
     const [Copied, setCopied] = useState(false);
 
-    const refralURL = "https://centralbank-tron.com/dashboard/refer/"+address;
+    const refralURL = "https://centralbank-tron.com/dashboard/refer/"+refralID;
 
    
     useEffect(() => {

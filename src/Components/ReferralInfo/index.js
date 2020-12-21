@@ -47,7 +47,7 @@ export default function ReferralInfo({ contract }) {
                             {referralBonus} TRX
                 </span>
                     </h2>
-                    <Button disabled={referralBonus <= 0 && true}>Claim Bonus</Button>
+                    <Button disabled={referralBonus <= 0 && true} >Claim Bonus</Button>
                 </div>
             </div>
         </div >

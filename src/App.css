@@ -147,10 +147,10 @@ body {
       flex-wrap: wrap;
       margin: 20px 0px;
   }
-  .dashboard .scrollableZone > .universalData {
+  /* .dashboard .scrollableZone > .universalData {
     flex-direction: column;
     align-items: center;
-  }
+  } */
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
