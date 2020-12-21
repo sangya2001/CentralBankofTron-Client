@@ -10,7 +10,7 @@ ul {
 body {
   overflow-y: hidden;
 }
-
+/* 
 /* Responsive CSS */
 
 /* Extra small devices (phones, 600px and down) */
@@ -81,18 +81,7 @@ body {
     flex-wrap: wrap;
     margin:20px 0px;
 }
-
-.dashboard .scrollableZone > .universalData {
-  flex-direction: column;
-  align-items: center;
 }
-
-.dashboard .scrollableZone > .universalData > div {
-  
-  padding: 3px 8px;
-  min-width: 269px;
-
-}}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -147,10 +136,6 @@ body {
       flex-wrap: wrap;
       margin: 20px 0px;
   }
-  /* .dashboard .scrollableZone > .universalData {
-    flex-direction: column;
-    align-items: center;
-  } */
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -283,4 +268,4 @@ body {
   .landing > .left {
     height: 91vh;
   }
-}
+} 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from "@material-ui/core";
 
-export default function ReferralInfo({ contract }) {
+export default function ReferralInfo({ contract, setIsLoading }) {
     const [referralBonus, setReferralBonus] = useState('');
     const [referralLevelOne, setReferralLevelOne] = useState('');
     const [referralLevelTwo, setreferralLevelTwo] = useState('');
@@ -44,10 +44,23 @@ export default function ReferralInfo({ contract }) {
                 <div style={{padding: "0 150px 20px 150px"}}>
                     <h2>
                         <span style={{ fontSize: "30px", color: "#5a5a5a", margin: "0" }}>
-                            {referralBonus} TRX
+                            {referralBonus/1000000} TRX
                 </span>
                     </h2>
-                    <Button disabled={referralBonus <= 0 && true} >Claim Bonus</Button>
+                    <Button onClick={() => 
+                        {contract.claimReferralBonus()
+                        .send()
+                        .then((res) => {
+                            console.log("Bonus Claimed!"); 
+                        })
+
+                        setIsLoading(true)
+                        setTimeout(() => {window.location.reload()}, 13000);
+                    }} 
+                        
+                        disabled={referralBonus <= 0 && true}>
+                            Claim Bonus
+                    </Button>
                 </div>
             </div>
         </div >

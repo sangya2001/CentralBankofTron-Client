@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useState, useEffect } from 'react'
 
-export default function AssetInfo({ contract }) {
+export default function AssetInfo({ contract, setIsLoading }) {
     const [compoundAsset, setCompoundAsset] = useState("0");
     const [dividend, setDividend] = useState("0");
     const [withdrawableAt, setWithdrawableAt] = useState("0");
@@ -34,7 +34,7 @@ export default function AssetInfo({ contract }) {
 
     return (
         <div className="assetInfo">
-            <h1 style={{margin: "40px 0"}}>Asset Info</h1>
+            <h1 style={{ margin: "40px 0" }}>Asset Info</h1>
             <div className="flexData">
                 <div className="totalInvestors">
                     <h2>
@@ -64,7 +64,9 @@ export default function AssetInfo({ contract }) {
                             }
                             {
                                 withdrawableAt <= 0 && <Button onClick={() => {
-                                    contract.withdrawAndReinvest().send().then(res => console.log(res))
+                                    contract.withdrawAndReinvest().send().then(() => {});
+                                    setIsLoading(true);
+                                    setTimeout(() => {window.location.reload()}, 13000);
                                 }}>Withdraw Dividend</Button>
                             }
                         </span>

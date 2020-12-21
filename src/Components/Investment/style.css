@@ -12,22 +12,35 @@
 }
 
 .investment > input {
-    border: 1px solid #3a3a3a;
-    padding: 15px;
-    width: 30vw;
-    margin-bottom: 20px;
-    border-radius: 12px;
+  border: 1px solid #3a3a3a;
+  padding: 15px;
+  width: 30vw;
+  margin-bottom: 20px;
+  border-radius: 12px;
 }
 
 .investment > input:focus {
-    outline: none;
+  outline: none;
 }
 
-.investment > .MuiButton-root{
-    background: #26de81;
-    color: #fff;
-    font-weight: 600;
-    padding: 8px 30px;
-    margin-left: 20px;
-    width: 20vw;
+.investment > .MuiButton-root {
+  background: #26de81;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 30px;
+  margin-left: 20px;
+  width: 20vw;
+}
+
+@media (max-width: 768px) {
+  .investment {
+    max-width: 55vw;
+  }
+  .investment > input {
+    width: 50vw;
+  }
+
+  .investment > .MuiButton-root {
+    width: 50vw;
+  }
 }
