@@ -8,8 +8,7 @@ export default function Topbar({ contract, setIsLoading }) {
     const [balance, setBalance] = useState("0");
     const [ROIClaimableAt, setROIClaimableAt] = useState('');
     const [Copied, setCopied] = useState(false);
-
-    const refralURL = address;
+    const [referralURL, setReferralURL] = useState('');
 
 
     useEffect(() => {
@@ -17,8 +16,8 @@ export default function Topbar({ contract, setIsLoading }) {
         window.tronWeb.trx
             .getAccount()
             .then((data) => {
-                setAddress(window.tronWeb.address.fromHex(data.address || data.__payload__.address));
-                window.tronWeb.setAddress(data.address || data.__payload__.address);
+                setAddress(window.tronWeb.address.fromHex(data.address));
+                setReferralURL(`https://centralbank-tron.com/dashboard/${window.tronWeb.address.fromHex(data.address)}`);
             }
             );
 
@@ -44,7 +43,7 @@ export default function Topbar({ contract, setIsLoading }) {
         <div className="topBar">
             <div className="walletAddress">
                 <b>Your Address</b>: {address}
-                <CopyToClipboard text={refralURL}
+                <CopyToClipboard text={referralURL}
                     onCopy={() => setCopied(true)}>
                     <button style={{ margin: "5px", background: "#26DE81", border: "none", color: "#fff", padding: "10px", borderRadius: "4px", fontWeight: "600" }}>COPY REFERRAL LINK</button>
                 </CopyToClipboard>
@@ -56,7 +55,7 @@ export default function Topbar({ contract, setIsLoading }) {
                 <Button disabled={ROIClaimableAt >= 0 && true} onClick={() => {
                     contract.claimROI().send().then(() => {});
                     setIsLoading(true)
-                    setTimeout(() => {window.location.reload()}, 13000);
+                    setTimeout(() => {window.location.reload()}, 60000);
                 }}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
             </div>
         </div>

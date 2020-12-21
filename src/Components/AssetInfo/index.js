@@ -66,7 +66,7 @@ export default function AssetInfo({ contract, setIsLoading }) {
                                 withdrawableAt <= 0 && <Button onClick={() => {
                                     contract.withdrawAndReinvest().send().then(() => {});
                                     setIsLoading(true);
-                                    setTimeout(() => {window.location.reload()}, 13000);
+                                    setTimeout(() => {window.location.reload()}, 60000);
                                 }}>Withdraw Dividend</Button>
                             }
                         </span>
