@@ -5,6 +5,7 @@ export default function AssetInfo({ contract, setIsLoading }) {
     const [compoundAsset, setCompoundAsset] = useState("0");
     const [dividend, setDividend] = useState("0");
     const [withdrawableAt, setWithdrawableAt] = useState("0");
+    const [isWithdrawableLocalStorage, setIsWithdrawableLocalStorage] = useState(false);
 
     useEffect(() => {
         window.tronWeb.trx
@@ -30,7 +31,16 @@ export default function AssetInfo({ contract, setIsLoading }) {
                     })
             }
             );
-    }, [contract])
+    }, [contract]);
+
+    useEffect(() => {
+        if (localStorage.getItem('canWithdrawAt') !== null) {
+            console.log('123')
+            parseInt(localStorage.getItem('canWithdrawAt') >= Date.now()) ?
+                setIsWithdrawableLocalStorage(false) :
+                setIsWithdrawableLocalStorage(true);
+        }
+    }, []);
 
     return (
         <div className="assetInfo">
@@ -64,10 +74,24 @@ export default function AssetInfo({ contract, setIsLoading }) {
                             }
                             {
                                 withdrawableAt <= 0 && <Button onClick={() => {
-                                    contract.withdrawAndReinvest().send().then(() => {});
+                                    contract.withdrawAndReinvest().send().then(() => { });
                                     setIsLoading(true);
-                                    setTimeout(() => {window.location.reload()}, 60000);
-                                }}>Withdraw Dividend</Button>
+                                    localStorage.setItem('canWithdrawAt', Date.now() + 21600000);
+                                    setTimeout(() => { window.location.reload() }, 60000);
+                                }}
+                                    disabled={isWithdrawableLocalStorage}
+                                >
+                                    Withdraw Dividend 
+                                    {
+                                        (localStorage.getItem('canWithdrawAt') !== null) && 
+                                            <span> - 
+                                                {
+                                                     ((parseInt(localStorage.getItem('canWithdrawAt')) - Date.now()) / 3600000).toFixed(2)
+                                                }
+                                                hr left
+                                            </span>
+                                    }
+                                </Button>
                             }
                         </span>
                     </h2>
