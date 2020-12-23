@@ -81,7 +81,7 @@ export default function AssetInfo({ contract, setIsLoading }) {
                                 }}
                                     disabled={isWithdrawableLocalStorage}
                                 >
-                                    Withdraw Dividend 
+                                    Withdraw 
                                     {
                                         (localStorage.getItem('canWithdrawAt') !== null) && 
                                             <span> - 
