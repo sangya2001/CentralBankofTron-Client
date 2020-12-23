@@ -1,19 +1,19 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Investment({ contract, refralID, setIsLoading }) {
+export default function Investment({ contract, setIsLoading }) {
   const [investmentAmount, setInvestmentAmount] = useState("");
-  const [refAddress, setRefAddress] = useState(refralID);
+  const [refAddress, setRefAddress] = useState('');
   const errorMsg = "Min Investment is 50TRX.";
 
 
 
   const invest = () => {
     contract
-      .investWithReferral(refAddress)
+      .investWithReferral(window.tronWeb.address.toHex(refAddress))
       .send({
         callValue: investmentAmount * 1000000,
         shouldPollResponse: true,
@@ -23,7 +23,7 @@ export default function Investment({ contract, refralID, setIsLoading }) {
       });
 
       setIsLoading(true);
-      setTimeout(() => {window.location.reload()}, 13000);
+      setTimeout(() => {window.location.reload()}, 60000);
   };
 
   const investWithoutAddress = () => {
@@ -40,6 +40,12 @@ export default function Investment({ contract, refralID, setIsLoading }) {
       setIsLoading(true)
       setTimeout(() => {window.location.reload()}, 13000);
   };
+
+  useEffect(() => {
+    if(window.location.href.split('/').pop() !== 'dashboard'){
+      setRefAddress(window.location.href.split('/').pop())
+    }
+  }, [])
 
   return (
     <div className="investment">

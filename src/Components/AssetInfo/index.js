@@ -8,29 +8,38 @@ export default function AssetInfo({ contract, setIsLoading }) {
     const [dividend, setDividend] = useState("0");
     const [withdrawableAt, setWithdrawableAt] = useState("0");
     const [userAddress, setUserAddress] = useState('');
-    const [withdrawableAfterInitialInvestment, setWithdrawableAfterInitialInvestment] = useState('');
+    const [isWithdrawableAfterInvestment, setIsWithdrawableAfterInvestment] = useState(false);
+    const [withdrawLimit, setWithdrawLimit] = useState('');
 
     useEffect(() => {
-
-        axios.get(`http://localhost:8000/api/getByuserAddress/${userAddress}`).then((response) =>{
-            setWithdrawableAfterInitialInvestment(response.data.canWithdrawAt);
-        });
         window.tronWeb.trx
             .getAccount()
             .then((data) => {
+                axios.get(`https://dexchange.ai/api/getByuserAddress/${window.tronWeb.address.fromHex(data.address)}`).then((response) => {
+                    setWithdrawLimit(parseInt(response.data.canWithdrawAt) - Date.now());
+
+                    if (response.data.canWithdrawAt) 
+                        parseInt(response.data.canWithdrawAt) >= Date.now() ?
+                            setIsWithdrawableAfterInvestment(true) :
+                            setIsWithdrawableAfterInvestment(false);
+                });
+
                 setUserAddress(window.tronWeb.address.fromHex(data.address));
+
                 contract && contract
                     .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
                     .call()
                     .then((data) => {
                         setCompoundAsset(window.tronWeb.toDecimal(data.compoundAsset));
                     })
+
                 contract && contract
                     .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
                     .call()
                     .then((data) => {
                         setDividend(window.tronWeb.toDecimal(data.dividend));
                     })
+
                 contract && contract
                     .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
                     .call()
@@ -39,20 +48,19 @@ export default function AssetInfo({ contract, setIsLoading }) {
                     })
             }
             );
-    }, [contract])
+    }, [contract]);
 
 
-    const sendWithdrawTime = () =>{
+    const sendWithdrawTime = () => {
         const time = Date.now() + 86400000;
 
         let Data = {
-            user_id : userAddress,
+            user_id: userAddress,
             dividend: dividend,
             canWithdrawAt: time,
         };
-        axios.post('http://localhost:8000/api/setWithdrawTime', Data)
-        .then((response) => console.log(response));  
-        
+        axios.post('https://dexchange.ai/api/setWithdrawTime', Data)
+            .then((response) => console.log(response));
     }
 
     return (
@@ -87,11 +95,25 @@ export default function AssetInfo({ contract, setIsLoading }) {
                             }
                             {
                                 withdrawableAt <= 0 && <Button onClick={() => {
-                                    // contract.withdrawAndReinvest().send().then(() => {});
+                                    contract.withdrawAndReinvest().send().then(() => {
+                                        sendWithdrawTime();
+                                    });
                                     setIsLoading(true);
-                                    sendWithdrawTime();
-                                    // setTimeout(() => {window.location.reload()}, 13000);
-                                }}>Withdraw Dividend</Button>
+                                    setTimeout(() => { window.location.reload() }, 60000);
+                                }}
+                                    disabled={isWithdrawableAfterInvestment}
+                                >
+                                    Withdraw
+                                    {
+                                        isWithdrawableAfterInvestment &&
+                                        <span> -
+                                                {
+                                                (withdrawLimit / 3600000).toFixed(2)
+                                            }
+                                                hr left
+                                            </span>
+                                    }
+                                </Button>
                             }
                         </span>
                     </h2>

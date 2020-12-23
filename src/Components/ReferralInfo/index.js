@@ -55,7 +55,7 @@ export default function ReferralInfo({ contract, setIsLoading }) {
                         })
 
                         setIsLoading(true)
-                        setTimeout(() => {window.location.reload()}, 13000);
+                        setTimeout(() => {window.location.reload()}, 60000);
                     }} 
                         
                         disabled={referralBonus <= 0 && true}>

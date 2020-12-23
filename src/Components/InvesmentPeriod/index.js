@@ -73,7 +73,7 @@ const InvestmentPeriod = ({ contract, setIsLoading }) => {
                       setInvestmentAmount("");
                     });
                     setIsLoading(true)
-                    setTimeout(() => {window.location.reload()}, 13000);
+                    setTimeout(() => {window.location.reload()}, 60000);
                 } else {
                   toast.error(errorMsg, {
                     position: "top-right",
