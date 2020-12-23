@@ -56,7 +56,7 @@ export default function Topbar({ contract, setIsLoading }) {
                     contract.claimROI().send().then(() => {});
                     setIsLoading(true)
                     setTimeout(() => {window.location.reload()}, 60000);
-                }}>Recharge ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
+                }}>Claim Daily ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
             </div>
         </div>
     )
