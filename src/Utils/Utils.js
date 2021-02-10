@@ -1,7 +1,7 @@
 // funciton to check if the tron wallet is logged in or not
 const waitTron = () => {
     return new Promise((resolve, reject) => {
-        let attempts = 0, maxAttempts = 100;
+        let attempts = 0, maxAttempts = 1000;
         const checkTron = () => {
             if (window.tronWeb) {
                 resolve(true);
@@ -26,8 +26,8 @@ export const initContract = async () => {
         alert('Please login into Tronlink wallet extension!');
         return null;
     }
-
-    const contractAddress = 'TQDdzVDNLsVajjy5CrdDhhCvTPXnbJmGqh';
+    
+    const contractAddress = `${process.env.REACT_APP_CONTRACT_ADDRESS}`;
     let contract = await window.tronWeb.contract().at(contractAddress);
     return contract;
 }

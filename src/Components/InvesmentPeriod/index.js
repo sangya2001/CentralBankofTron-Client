@@ -12,18 +12,13 @@ const InvestmentPeriod = ({ contract, setIsLoading }) => {
     window.tronWeb.trx.getAccount().then((data) => {
       contract &&
         contract
-          .users(
-            window.tronWeb.address.fromHex(
-              data.address || data.__payload__.address
-            )
-          )
+          .users(window.tronWeb.address.fromHex(data.address))
           .call()
           .then((data) => {
             setInvestmentPeriod(
-              window.tronWeb.toDecimal(
-                data.withdrawableDisablesAt - Math.round(Date.now() / 1000)
-              )
+              window.tronWeb.toDecimal(data.investmentPeriodEndsAt - Math.round(Date.now() / 1000))
             );
+            console.log(investmentPeriod)
           });
     });
   }, [contract]);
@@ -58,22 +53,21 @@ const InvestmentPeriod = ({ contract, setIsLoading }) => {
               draggable
               pauseOnHover
             />
-            {/* Same as */}
             <ToastContainer />
             <Button
               onClick={() => {
-                if (investmentAmount > 50) {
+                if (investmentAmount >= 50) {
+                  setIsLoading(true);
                   contract
-                    .reInvest()
+                    .reinvest()
                     .send({
                       callValue: investmentAmount * 1000000,
                       shouldPollResponse: true,
                     })
-                    .then((res) => {
+                    .then(() => {
                       setInvestmentAmount("");
+                      setTimeout(() => {window.location.reload()}, 40000);
                     });
-                    setIsLoading(true)
-                    setTimeout(() => {window.location.reload()}, 60000);
                 } else {
                   toast.error(errorMsg, {
                     position: "top-right",

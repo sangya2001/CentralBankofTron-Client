@@ -9,36 +9,35 @@ export default function Investment({ contract, setIsLoading }) {
   const [refAddress, setRefAddress] = useState('');
   const errorMsg = "Min Investment is 50TRX.";
 
-
-
   const invest = () => {
+    setIsLoading(true);
+    
     contract
       .investWithReferral(window.tronWeb.address.toHex(refAddress))
       .send({
         callValue: investmentAmount * 1000000,
         shouldPollResponse: true,
       })
-      .then((res) => {
+      .then(() => {
         setInvestmentAmount("");
+        setTimeout(() => {window.location.reload()}, 30000);
       });
-
-      setIsLoading(true);
-      setTimeout(() => {window.location.reload()}, 60000);
   };
 
   const investWithoutAddress = () => {
+    setIsLoading(true);
+
     contract
       .investmentWithoutReferral()
       .send({
         callValue: investmentAmount * 1000000,
         shouldPollResponse: true,
       })
-      .then((res) => {
+      .then(() => {
         setInvestmentAmount("");
-      });
 
-      setIsLoading(true)
-      setTimeout(() => {window.location.reload()}, 13000);
+        setTimeout(() => {window.location.reload()}, 30000);
+      });
   };
 
   useEffect(() => {
@@ -60,7 +59,6 @@ export default function Investment({ contract, setIsLoading }) {
         draggable
         pauseOnHover
       />
-      {/* Same as */}
       <ToastContainer />
       <h2>Start Investing</h2>
 
@@ -92,6 +90,7 @@ export default function Investment({ contract, setIsLoading }) {
             setInvestmentAmount("");
             return;
           }
+
           refAddress !== "" ? invest() : investWithoutAddress();
         }}
       >

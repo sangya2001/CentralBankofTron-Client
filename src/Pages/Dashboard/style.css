@@ -18,6 +18,10 @@
   margin-right: 20px;
 }
 
+.dashboard .topBar .nonWithdrawable .MuiButton-root{
+  background: rgb(255, 152, 68);
+}
+
 /* universal data */
 .dashboard .scrollableZone > .universalData {
   margin: 30px 0 50px 0;
@@ -84,7 +88,7 @@
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 19px 19px 44px rgba(211, 209, 255, 0.5), -19px -19px 44px #ffffff;
-  padding: 5px 100px;
+  padding: 5px 100px 20px 100px;
   margin-right: 50px;
   border-left: 5px solid rgba(38, 222, 129, 0.5);
 }

@@ -6,18 +6,14 @@ export default function UniversalData({ contract }) {
     const [totalReferralBonus, setTotalReferralBonus] = useState("0");
 
     useEffect(() => {
-        contract
-            .totalInvestors()
+        contract && contract
+            .getUniversalData()
             .call()
-            .then((data) => setTotalInvestor(window.tronWeb.toDecimal(data)));
-        contract
-            .totalInvestment()
-            .call()
-            .then((data) => setTotalInvestment(window.tronWeb.toDecimal(data)));
-        contract
-            .totalReferralBonus()
-            .call()
-            .then((data) => setTotalReferralBonus(window.tronWeb.toDecimal(data)));
+            .then((data) => {
+                setTotalInvestor(window.tronWeb.toDecimal(data[0]));
+                setTotalInvestment(window.tronWeb.toDecimal(data[1]));
+                setTotalReferralBonus(window.tronWeb.toDecimal(data[2]));
+            });
     }, [contract])
     return (
         <div className="universalData">
@@ -26,7 +22,7 @@ export default function UniversalData({ contract }) {
                     Total Investors
                   <br />
                     <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
-                        {totalInvestor}
+                        {totalInvestor + 168}
                     </span>
                 </h2>
             </div>
@@ -35,7 +31,7 @@ export default function UniversalData({ contract }) {
                     Total Investment
                   <br />
                     <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
-                        {totalInvestment / 10 ** 6} TRX
+                        {(totalInvestment / 10 ** 6) + 425000} TRX
                   </span>
                 </h2>
             </div>

@@ -6,10 +6,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 export default function Topbar({ contract, setIsLoading }) {
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState("0");
-    const [ROIClaimableAt, setROIClaimableAt] = useState('');
     const [Copied, setCopied] = useState(false);
     const [referralURL, setReferralURL] = useState('');
-
+    const [canWithdraw, setCanWithdraw] = useState('');
 
     useEffect(() => {
         // set account address
@@ -17,27 +16,37 @@ export default function Topbar({ contract, setIsLoading }) {
             .getAccount()
             .then((data) => {
                 setAddress(window.tronWeb.address.fromHex(data.address));
+
+                contract && contract
+                    .users(window.tronWeb.address.fromHex(data.address))
+                    .call()
+                    .then((data) => {
+                        setCanWithdraw(window.tronWeb.toDecimal(data.withdrawableAt - Math.round(Date.now() / 1000)));
+                    })
+
                 setReferralURL(`https://centralbank-tron.com/dashboard/${window.tronWeb.address.fromHex(data.address)}`);
             }
             );
 
         // set account balance
         window.tronWeb.trx.getBalance(address).then((data) => setBalance(data));
-    }, [address]);
+    }, [address, contract]);
 
-    useEffect(() => {
-        window.tronWeb.trx
-            .getAccount()
+    const claimROI = () => {
+        setIsLoading(true);
+
+        contract && contract
+            .users(window.tronWeb.address.fromHex(address))
+            .call()
             .then((data) => {
-                contract && contract
-                    .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
-                    .call()
-                    .then((data) => {
-                        setROIClaimableAt(data.ROIClaimableAt._hex !== "0x00" && window.tronWeb.toDecimal(data.ROIClaimableAt) - Math.round(Date.now() / 1000))
-                    })
-            }
-            );
-    }, [contract])
+                const timeToRound = Math.floor((Math.round(Date.now() / 1000) - data.withdrawableAt) / 86400) + 1;
+
+                contract.withdraw(timeToRound).send().then(() => {
+                    console.log("Withdrawed Successfully!");
+                    setTimeout(() => { window.location.reload() }, 40000);
+                })
+            })
+    }
 
     return (
         <div className="topBar">
@@ -50,13 +59,9 @@ export default function Topbar({ contract, setIsLoading }) {
                 {Copied ? <span style={{ color: 'red' }}>Copied.</span> : null}
 
             </div>
-            <div className="walletBalance">
-                <div style={{marginRight: "10px"}}><b>Your Balance</b>: {balance / 10 ** 6} TRX</div>
-                <Button disabled={ROIClaimableAt >= 0 && true} onClick={() => {
-                    contract.claimROI().send().then(() => {});
-                    setIsLoading(true)
-                    setTimeout(() => {window.location.reload()}, 60000);
-                }}>Claim Daily ROI - {(ROIClaimableAt / 3600).toFixed(2)} hr Left</Button>
+            <div className={canWithdraw > 0 ? "walletBalance nonWithdrawable" : "walletBalance"}>
+                <div style={{ marginRight: "10px" }}><b>Your Balance</b>: {(balance / 10 ** 6).toFixed(2)} TRX</div>
+                <Button onClick={() => claimROI()} disabled={canWithdraw > 0 ? true : false}>Claim ROI {canWithdraw > 0 && <div>- {(canWithdraw / 3600).toFixed(2)} hr left</div>}</Button>
             </div>
         </div>
     )

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar";
 import "./style.css";
 
+// supportive components
 import { initContract } from "../../Utils/Utils";
 import Loading from "../../Components/Loading";
 import AssetInfo from "../../Components/AssetInfo";
@@ -9,7 +10,6 @@ import Topbar from "../../Components/Topbar";
 import UniversalData from "../../Components/UniversalData";
 import ReferralInfo from "../../Components/ReferralInfo";
 import Investment from "../../Components/Investment";
-import { useParams } from "react-router-dom";
 import InvestmentPeriod from "../../Components/InvesmentPeriod";
 
 export default function Dashboard() {
@@ -17,42 +17,37 @@ export default function Dashboard() {
   const [investmentPeriod, setInvestmentPeriod] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const params = useParams();
-  const refralID = (params.refer) ? params.refralID : "";
-
   // user details
   const [isUser, setIsUser] = useState(0);
 
   useEffect(() => {
+    // initilize the contract
     initContract().then((contract) => {
-      // check if user or not
       window.tronWeb.trx.getAccount().then((data) =>
-        contract
-          .users(window.tronWeb.address.fromHex(data.__payload__.address || data.address))
+        {
+          // check if user is registered or not
+          contract
+          .users(window.tronWeb.address.fromHex(data.address))
           .call()
           .then((data) => {
-            setIsUser(window.tronWeb.toDecimal(data.compoundAsset));
+            setIsUser(window.tronWeb.toDecimal(data.totalInvestment));
           })
-      );
-      setContract(contract);
-
-      window.tronWeb.trx.getAccount().then((data) => {
-        contract &&
+          
+          // set end period
           contract
-            .users(
-              window.tronWeb.address.fromHex(
-                data.address || data.__payload__.address
-              )
-            )
+            .users(window.tronWeb.address.fromHex(data.address))
             .call()
             .then((data) => {
               setInvestmentPeriod(
                 window.tronWeb.toDecimal(
-                  data.withdrawableDisablesAt - Math.round(Date.now() / 1000)
+                  data.investmentPeriodEndsAt - Math.round(Date.now() / 1000)
                 )
               );
             });
-      });
+        }
+      );
+
+      setContract(contract);
     });
   }, []);
   return (
@@ -65,11 +60,11 @@ export default function Dashboard() {
           <div className="scrollableZone">
             <UniversalData contract={contract} />
             <hr />
-            {isUser !== 0 && investmentPeriod > 0 && <InvestmentPeriod contract={contract} setIsLoading={setIsLoading}/>}
-            {isUser !== 0 && investmentPeriod > 0 && <AssetInfo contract={contract} setIsLoading={setIsLoading} />}
+            {isUser !== 0 && <InvestmentPeriod contract={contract} setIsLoading={setIsLoading}/>}
+            {isUser !== 0 && investmentPeriod > 0 && <AssetInfo contract={contract}/>}
             {isUser !== 0 && <hr />}
             {isUser !== 0 && investmentPeriod > 0 && <ReferralInfo contract={contract} setIsLoading={setIsLoading}/>}
-            {isUser === 0 && <Investment contract={contract} refralID={refralID} setIsLoading={setIsLoading}/>}
+            {isUser === 0 && <Investment contract={contract} setIsLoading={setIsLoading}/>}
           </div>
         </div>
       ) : (

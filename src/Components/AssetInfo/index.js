@@ -1,98 +1,77 @@
-import { Button } from '@material-ui/core';
 import React, { useState, useEffect } from 'react'
 
-export default function AssetInfo({ contract, setIsLoading }) {
-    const [compoundAsset, setCompoundAsset] = useState("0");
-    const [dividend, setDividend] = useState("0");
-    const [withdrawableAt, setWithdrawableAt] = useState("0");
-    const [isWithdrawableLocalStorage, setIsWithdrawableLocalStorage] = useState(false);
+
+export default function AssetInfo({ contract }) {
+    const [totalInvestment, setTotalInvestment] = useState("0");
+    const [initialInvestment, setInitialInvestment] = useState("0");
+    const [dividendEarned, setDividendEarned] = useState("0");
 
     useEffect(() => {
         window.tronWeb.trx
             .getAccount()
             .then((data) => {
                 contract && contract
-                    .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
+                    .users(window.tronWeb.address.fromHex(data.address))
                     .call()
                     .then((data) => {
-                        setCompoundAsset(window.tronWeb.toDecimal(data.compoundAsset));
+                        setTotalInvestment(window.tronWeb.toDecimal(data.totalInvestment));
                     })
+
                 contract && contract
-                    .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
+                    .users(window.tronWeb.address.fromHex(data.address))
                     .call()
                     .then((data) => {
-                        setDividend(window.tronWeb.toDecimal(data.dividend));
+                        setInitialInvestment(window.tronWeb.toDecimal(data.initialInvestment));
                     })
+
                 contract && contract
-                    .users(window.tronWeb.address.fromHex(data.address || data.__payload__.address))
+                    .users(window.tronWeb.address.fromHex(data.address))
                     .call()
                     .then((data) => {
-                        setWithdrawableAt(window.tronWeb.toDecimal(data.withdrawableAt - Math.round(Date.now() / 1000)));
+                        var ROI = (data.totalInvestment * 7) / 100;
+                        var ROIPerSecond = ROI / 86400;
+
+                        var timeElapsed = Math.round(Date.now() / 1000) - (window.tronWeb.toDecimal(data.withdrawableAt) - 86400);
+                        setDividendEarned((timeElapsed * ROIPerSecond).toFixed(2));
                     })
             }
             );
     }, [contract]);
 
-    useEffect(() => {
-        if (localStorage.getItem('canWithdrawAt') !== null) {
-            console.log('123')
-            parseInt(localStorage.getItem('canWithdrawAt') >= Date.now()) ?
-                setIsWithdrawableLocalStorage(false) :
-                setIsWithdrawableLocalStorage(true);
-        }
-    }, []);
-
     return (
         <div className="assetInfo">
             <h1 style={{ margin: "40px 0" }}>Asset Info</h1>
             <div className="flexData">
+                {/* total investment */}
                 <div className="totalInvestors">
                     <h2>
-                        Compound Asset
+                        Initial Investment
                         <br />
                         <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
-                            {compoundAsset / 1000000} TRX
+                            {initialInvestment / 1000000} TRX
                         </span>
                     </h2>
                 </div>
+
+                <div className="totalInvestors">
+                    <h2>
+                        Compound Investment
+                        <br />
+                        <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
+                            {
+                                (totalInvestment / 1000000).toFixed(2)
+                            } TRX
+                        </span>
+                    </h2>
+                </div>
+
+                {/* dividend is calculated automatically */}
                 <div className="totalInvestment">
                     <h2>
-                        Dividend
+                        Dividend Earned
                         <br />
                         <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
-                            {dividend / 1000000} TRX
-                        </span>
-                    </h2>
-                </div>
-                <div className="totalReferralBonus">
-                    <h2>
-                        Withdrawble
-                        <br />
-                        <span style={{ fontSize: "30px", color: "#5a5a5a" }}>
-                            {
-                                withdrawableAt > 0 && <div>{(withdrawableAt / 3600).toFixed(2)} Hours</div>
-                            }
-                            {
-                                withdrawableAt <= 0 && <Button onClick={() => {
-                                    contract.withdrawAndReinvest().send().then(() => { });
-                                    setIsLoading(true);
-                                    localStorage.setItem('canWithdrawAt', Date.now() + 21600000);
-                                    setTimeout(() => { window.location.reload() }, 60000);
-                                }}
-                                    disabled={isWithdrawableLocalStorage}
-                                >
-                                    Withdraw 
-                                    {
-                                        (localStorage.getItem('canWithdrawAt') !== null) && 
-                                            <span> - 
-                                                {
-                                                     ((parseInt(localStorage.getItem('canWithdrawAt')) - Date.now()) / 3600000).toFixed(2)
-                                                }
-                                                hr left
-                                            </span>
-                                    }
-                                </Button>
-                            }
+                            {(dividendEarned / 1000000).toFixed(2)} TRX
                         </span>
                     </h2>
                 </div>
